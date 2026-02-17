@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>timer</title>
+    <style>
+        .timer-container {
+            font-family: Arial, sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer-container">
+        <span id="timerDisplay">01:40</span>
+    </div>
+
+    <script>
+        let secondsLeft = 100;
+        const timerDisplay = document.getElementById('timerDisplay');
+        let countdownInterval = null;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(secondsLeft / 60);
+            const seconds = secondsLeft % 60;
+
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            timerDisplay.textContent = formattedTime;
+
+            if (secondsLeft <= 0) {
+                clearInterval(countdownInterval);
+                timerDisplay.textContent = "wow, you waited 100 seconds of your life for absolutely nothing.";
+            }
+
+            secondsLeft--;
+        }
+
+        window.onload = function() {
+            updateTimerDisplay(); 
+            countdownInterval = setInterval(updateTimerDisplay, 1000);
+        };
+    </script>
+
+</body>
+</html>
